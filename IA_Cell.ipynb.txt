@@ -1,0 +1,59 @@
+Google Coolab
+
+pip install -q -U google-generativeai
+
+
+import google.generativeai as genai
+
+GOOGLE_API_KEY=" "
+genai.configure(api_key=GOOGLE_API_KEY)
+
+for m in genai.list_models():
+  if 'generateContent' in m.supported_generation_methods:
+     print(m.name)
+
+
+generation_config = {
+    "candidate_count": 1,
+    "temperature": 0.5,
+}
+
+safety_settings = {
+   "HARASSMENT": "BLOCK_NONE",
+    "HATE": "BLOCK_NONE",
+   "SEXUAL": "BLOCK_NONE",
+   "DANGEROUS": "BLOCK_NONE",
+
+
+model = genai.GenerativeModel(model_name="gemini-1.0-pro",
+generation_config=generation_config, safety_settings=safety_settings)
+
+responde = model.generate_content("Bem vindo ao chat de Astronomia da Equipe de Ciências Espaciais do Colégio Estadual do Paraná.")
+print(response.text)
+
+#inicia o chat e mantem o histórico
+chat.model.start_chat(history=[])
+
+#inclui interatividade (pergunta e resposta)
+
+prompt=input("Sobre qual tema de Astronomia vamos conversar hoje? (escreva FIM para terminar a conversa)")
+
+#critério de parada do chat.
+while prompt != "fim"
+   response =   chat.send_message(prompt)
+print("Resposta: ",   response.text, "\n")
+prompt = input("Faça sua pergunta").
+
+
+import textwrap
+from IPython.display import display
+from IPython.display import Markdown
+
+
+def to_markdown(text):
+  text = text.replace('•', '  *')
+  return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
+
+for message in chat.history:
+  display(to_markdown(f'**(message.role)**: {message.parts[0].text}'))
+   print('---------------------------------')
